@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
                 Image.asset('assets/imagenes/logo.png', height: 150),
                 SizedBox(height: 10),
                 Text(
-                  'Solo para giles',
+                  'No se aceptan tarjetas',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
