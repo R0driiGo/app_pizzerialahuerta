@@ -8,6 +8,7 @@ import 'package:app_pizzerialahuerta/ui/pedidos/registrar_pedido_hamburguesa.dar
 import 'package:app_pizzerialahuerta/ui/pedidos/registrar_pedido_pizza.dart';
 import 'package:app_pizzerialahuerta/ui/principal/home.dart';
 import 'package:app_pizzerialahuerta/utils/estado_pedidos.dart';
+import 'package:path/path.dart';
 
 void main() {
   runApp(
@@ -19,6 +20,9 @@ void main() {
     ),
   );
 }
+
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login(),
+      home: Login(), // Pantalla de carga inicial
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'database_helper.dart';
+
 class Usuario {
   String nombre;
   String apellidos;
@@ -13,25 +15,29 @@ class Usuario {
 }
 
 class GestionUsuarios {
-  static List<Usuario> _usuarios = [
-    Usuario(
-      nombre: 'Admin',
-      apellidos: 'Admin',
-      correo: 'admin@ucv.com',
-      contrasena: 'administrador', // Nueva contraseña
-    ),
-  ];
+  static Future<void> registrarUsuario(String nombre, String apellidos,
+      String correo, String contrasena) async {
+    // Crea un mapa con los datos del nuevo usuario
+    final Map<String, dynamic> user = {
+      'firstName': nombre,
+      'lastName': apellidos,
+      'email': correo,
+      'password': contrasena,
+    };
 
-  static void registrarUsuario(String nombre, String apellidos, String correo, String contrasena) {
-    _usuarios.add(Usuario(nombre: nombre, apellidos: apellidos, correo: correo, contrasena: contrasena));
+    // Inserta el nuevo usuario en la base de datos
+    await DatabaseHelper().insertUser(user);
   }
 
-  static Usuario? verificarCredenciales(String correo, String contrasena) {
-    for (var usuario in _usuarios) {
-      if (usuario.correo == correo && usuario.contrasena == contrasena) {
-        return usuario;
-      }
+  static Future<Usuario?> verificarCredenciales(String correo, String contrasena) async {
+    // Busca al usuario en la base de datos
+    final usuario = await DatabaseHelper().getUserByEmailAndPassword(correo, contrasena);
+
+    // Si el usuario no es null, significa que se encontró en la base de datos
+    if (usuario != null) {
+      return usuario; // Retorna el usuario encontrado
+    } else {
+      return null; // No se encontró el usuario, retorna null
     }
-    return null;
   }
 }
